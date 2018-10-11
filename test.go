@@ -1,8 +1,9 @@
 package main
+
 import "fmt"
 
 type INode struct {
-	data string
+	data     string
 	nextNode *INode
 }
 type QueueList struct {
@@ -10,15 +11,19 @@ type QueueList struct {
 	tail *INode
 }
 
-func main(){
-	headNode:=INode{"头指针",nil}
-	queue:=QueueList{&headNode,nil}
-	addNode :=INode{"addNode",nil}
+func main() {
+	headNode := INode{"头指针", nil}
+	queue := QueueList{&headNode, nil}
+	addNode := INode{"addNode", nil}
 	headNode.nextNode = &addNode
 
 	fmt.Println((*queue.head).data)
 }
-//入队操作
-func enqueue(node INode,queue QueueList) bool{
 
+//入队操作
+func enqueue(node INode, queue QueueList) bool {
+	//队列无元素
+	if (*queue.head).nextNode == (*queue.tail).nextNode && (*queue.head).nextNode == nil {
+
+	}
 }
