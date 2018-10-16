@@ -36,15 +36,29 @@ type BlockChain struct {
 }
 
 func (blockChain *BlockChain) AddBlock(data string) {
-	prevHash := blockChain.blocks[len(blockChain.blocks)-1].PreBlockHash
+	prevHash := blockChain.blocks[len(blockChain.blocks)-1].Hash
 	newBlock := NewBlock(data, prevHash)
 	blockChain.blocks = append(blockChain.blocks, newBlock)
 }
+
+//创世区块
 func NewGenesisBlock() *Block {
 	return NewBlock("GenesisBlock", []byte{})
 }
 
+func NewBlockChain() *BlockChain {
+	return &BlockChain{[]*Block{NewGenesisBlock()}}
+}
+
 func main() {
-	block := NewBlock("123abc", []byte{12})
-	fmt.Println(block.Hash)
+	bc := NewBlockChain()
+
+	bc.AddBlock("Send 1 BTC to Ivan")
+	bc.AddBlock("Send 2 more BTC to Ivan")
+
+	for _, block := range bc.blocks {
+		fmt.Printf("Prev. hash: %x\n", block.PreBlockHash)
+		fmt.Printf("Data: %s\n", block.Data)
+		fmt.Printf("Hash: %x\n", block.Hash)
+	}
 }
