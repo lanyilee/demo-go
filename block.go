@@ -31,6 +31,19 @@ func NewBlock(data string, prevBlockHash []byte) *Block {
 	return block
 }
 
+type BlockChain struct {
+	blocks []*Block
+}
+
+func (blockChain *BlockChain) AddBlock(data string) {
+	prevHash := blockChain.blocks[len(blockChain.blocks)-1].PreBlockHash
+	newBlock := NewBlock(data, prevHash)
+	blockChain.blocks = append(blockChain.blocks, newBlock)
+}
+func NewGenesisBlock() *Block {
+	return NewBlock("GenesisBlock", []byte{})
+}
+
 func main() {
 	block := NewBlock("123abc", []byte{12})
 	fmt.Println(block.Hash)
