@@ -1,5 +1,7 @@
 package main
 
+import "crypto/md5"
+
 func QuickSort(A []*int, p int, r int) {
 	if p >= r {
 		return
